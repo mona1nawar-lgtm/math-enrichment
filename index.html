@@ -1,1 +1,125 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>تحديات الرياضيات الإثرائية</title><style>body{font-family:Tahoma,Arial;background:#faf7f4;color:#35323a;margin:0;padding:20px}main{max-width:800px;margin:auto}.hero,.question{background:white;border:1px solid #e8dfe8;border-radius:16px;padding:20px;margin:15px 0;box-shadow:0 2px 7px #00000008}h1{color:#725575}h2{color:#856083}button,select,input{font:inherit;padding:10px;border-radius:9px;border:1px solid #bbaabd}button{background:#786080;color:white;cursor:pointer;margin:5px}button:disabled{opacity:.6}.option{display:block;background:#f8f3f9;color:#343039;width:95%;text-align:right}.chosen{background:#e2d6e8}.feedback{font-weight:bold;padding:8px}.correct{color:#18764d}.wrong{color:#b13f49}.small{font-size:13px;color:#666}@media print{button,select{display:none}.question{break-inside:avoid}}</style></head><body><main><section class="hero"><h1>🌸 تحديات الرياضيات الإثرائية</h1><p>الصف الثالث والسادس الابتدائي | إعداد المعلمة: منى القثامي</p><label>اختاري الصف: <select id="grade" onchange="render()"><option value="3">الثالث الابتدائي</option><option value="6">السادس الابتدائي</option></select></label><p>اسم الطالبة: <input id="student" placeholder="اكتبي اسمك"></p><p class="small">اختاري الإجابة، ثم اضغطي «تحققي من إجاباتي». يمكن إعادة المحاولة.</p></section><div id="questions"></div><section class="hero"><button onclick="check()">تحققي من إجاباتي ✓</button><button onclick="resetAnswers()">إعادة المحاولة</button><button onclick="window.print()">طباعة الشاهد</button><h2 id="result" aria-live="polite"></h2></section></main><script>const bank={3:[['اكتشفي النمط: 3، 6، 12، 24، ... ما العدد التالي؟',['30','36','48','42'],2,'يتضاعف العدد في كل مرة.'],['لدى سارة 4 صناديق، في كل صندوق 5 أقلام. أعطت صديقتها 3 أقلام. كم بقي؟',['17','20','12','23'],0,'4 × 5 − 3 = 17'],['أي عبارة تساوي 6 × 4؟',['6 + 4','4 + 4 + 4 + 4 + 4 + 4','6 + 6 + 6','4 × 4'],1,'ست مجموعات، في كل منها أربعة.'],['عدد مكوّن من 3 مئات و5 عشرات و8 آحاد. ما هو؟',['835','358','538','385'],1,'300 + 50 + 8 = 358'],['عدد زوجي أكبر من 20 وأصغر من 30، ومجموع رقميه 8. ما هو؟',['22','24','26','28'],2,'2 + 6 = 8'],['في حديقة 3 صفوف من الأشجار، في كل صف 4 أشجار. زُرعت شجرتان إضافيتان. كم المجموع؟',['12','14','16','18'],1,'3 × 4 + 2 = 14']],6:[['إذا كان 3/4 عدد يساوي 18، فما العدد؟',['20','24','27','32'],1,'18 ÷ 3 × 4 = 24'],['ثمن حقيبة 120 ريالًا، وخُفِّض 25٪. ما السعر بعد الخصم؟',['90','95','100','80'],0,'الخصم 30 ريالًا.'],['متوسط أربعة أعداد 12، وثلاثة منها 10 و14 و8. ما الرابع؟',['12','14','16','18'],2,'المجموع 48، ومجموع الثلاثة 32.'],['مستطيل طوله 9 سم وعرضه 5 سم. ما مساحته؟',['14 سم²','28 سم²','45 سم²','90 سم²'],2,'المساحة = الطول × العرض.'],['ما العدد التالي في النمط: 2، 5، 11، 23، ...؟',['35','45','47','49'],2,'كل حد يساوي السابق × 2 + 1.'],['نسبة الكرات الحمراء إلى الزرقاء 2 : 3، والمجموع 25 كرة. كم كرة زرقاء؟',['10','12','15','20'],2,'عدد الأجزاء 5، وقيمة الجزء 5.']]};let answers={};function render(){answers={};let g=document.getElementById('grade').value;document.getElementById('questions').innerHTML=bank[g].map((q,i)=>`<article class="question"><h2>التحدي ${i+1}</h2><p>${q[0]}</p>${q[1].map((o,j)=>`<button class="option" id="b${i}_${j}" onclick="choose(${i},${j})">${o}</button>`).join('')}<div id="f${i}" class="feedback"></div></article>`).join('');document.getElementById('result').textContent=''}function choose(i,j){answers[i]=j;document.querySelectorAll(`[id^="b${i}_"]`).forEach(b=>b.classList.remove('chosen'));document.getElementById(`b${i}_${j}`).classList.add('chosen')}function check(){let g=document.getElementById('grade').value,score=0;bank[g].forEach((q,i)=>{let good=answers[i]===q[2];if(good)score++;let f=document.getElementById('f'+i);f.className='feedback '+(good?'correct':'wrong');f.textContent=answers[i]===undefined?'لم تجيبي بعد. التفسير: '+q[3]:good?'أحسنتِ! '+q[3]:'راجعي الحل. '+q[3]});let name=document.getElementById('student').value.trim();document.getElementById('result').textContent=(name?name+'، ':'')+'نتيجتك: '+score+' من '+bank[g].length+' — '+(score===bank[g].length?'ممتازة! 🌟':'حاولي مرة أخرى لتحسين نتيجتك 🌷')}function resetAnswers(){render()}render();</script></body></html>
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تحديات الرياضيات الإثرائية</title>
+<style>
+body{font-family:Tahoma,Arial;background:#faf7f4;color:#35323a;margin:0;padding:20px}
+main{max-width:800px;margin:auto}
+.hero,.question{background:white;border:1px solid #e8dfe8;border-radius:16px;padding:20px;margin:15px 0;box-shadow:0 2px 7px #00000008}
+h1{color:#725575}
+h2{color:#856083}
+button,select,input{font:inherit;padding:10px;border-radius:9px;border:1px solid #bbaabd}
+button{background:#786080;color:white;cursor:pointer;margin:5px}
+button:disabled{opacity:.6}
+.option{display:block;background:#f8f3f9;color:#343039;width:95%;text-align:right}
+.chosen{background:#e2d6e8}
+.feedback{font-weight:bold;padding:8px}
+.correct{color:#18764d}
+.wrong{color:#b13f49}
+.small{font-size:13px;color:#666}
+@media print{
+button,select{display:none}
+.question{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+<h1>🌸 تحديات الرياضيات الإثرائية</h1>
+<p>الصف الثالث والسادس الابتدائي | إعداد المعلمة: منى القثامي</p>
+<label>اختاري الصف:
+<select id="grade" onchange="render()">
+<option value="3">الثالث الابتدائي</option>
+<option value="6">السادس الابتدائي</option>
+</select>
+</label>
+<p>اسم الطالبة: <input id="student" placeholder="اكتبي اسمك"></p>
+<p class="small">اختاري الإجابة، ثم اضغطي «تحققي من إجاباتي». يمكن إعادة المحاولة.</p>
+</section>
+
+<div id="questions"></div>
+
+<section class="hero">
+<button onclick="check()">تحققي من إجاباتي ✓</button>
+<button onclick="resetAnswers()">إعادة المحاولة</button>
+<button onclick="window.print()">طباعة الشاهد</button>
+<h2 id="result" aria-live="polite"></h2>
+</section>
+</main>
+
+<script>
+const bank={
+3:[
+['اكتشفي النمط: ٣، ٦، ١٢، ٢٤، ... ما العدد التالي؟',['٣٠','٣٦','٤٨','٤٢'],2,'يتضاعف العدد في كل مرة.'],
+['لدى سارة ٤ صناديق، في كل صندوق ٥ أقلام. أعطت صديقتها ٣ أقلام. كم بقي؟',['١٧','٢٠','١٢','٢٣'],0,'٤ × ٥ − ٣ = ١٧'],
+['أي عبارة تساوي ٦ × ٤؟',['٦ + ٤','٤ + ٤ + ٤ + ٤ + ٤ + ٤','٦ + ٦ + ٦','٤ × ٤'],1,'ست مجموعات، في كل منها أربعة.'],
+['عدد مكوّن من ٣ مئات و٥ عشرات و٨ آحاد. ما هو؟',['٨٣٥','٣٥٨','٥٣٨','٣٨٥'],1,'٣٠٠ + ٥٠ + ٨ = ٣٥٨'],
+['عدد زوجي أكبر من ٢٠ وأصغر من ٣٠، ومجموع رقميه ٨. ما هو؟',['٢٢','٢٤','٢٦','٢٨'],2,'٢ + ٦ = ٨'],
+['في حديقة ٣ صفوف من الأشجار، في كل صف ٤ أشجار. زُرعت شجرتان إضافيتان. كم المجموع؟',['١٢','١٤','١٦','١٨'],1,'٣ × ٤ + ٢ = ١٤']
+],
+6:[
+['إذا كان ٣/٤ عدد يساوي ١٨، فما العدد؟',['٢٠','٢٤','٢٧','٣٢'],1,'١٨ ÷ ٣ × ٤ = ٢٤'],
+['ثمن حقيبة ١٢٠ ريالًا، وخُفِّض ٢٥٪. ما السعر بعد الخصم؟',['٩٠','٩٥','١٠٠','٨٠'],0,'الخصم ٣٠ ريالًا.'],
+['متوسط أربعة أعداد ١٢، وثلاثة منها ١٠ و١٤ و٨. ما الرابع؟',['١٢','١٤','١٦','١٨'],2,'المجموع ٤٨، ومجموع الثلاثة ٣٢.'],
+['مستطيل طوله ٩ سم وعرضه ٥ سم. ما مساحته؟',['١٤ سم²','٢٨ سم²','٤٥ سم²','٩٠ سم²'],2,'المساحة = الطول × العرض.'],
+['ما العدد التالي في النمط: ٢، ٥، ١١، ٢٣، ...؟',['٣٥','٤٥','٤٧','٤٩'],2,'كل حد يساوي السابق × ٢ + ١.'],
+['نسبة الكرات الحمراء إلى الزرقاء ٢ : ٣، والمجموع ٢٥ كرة. كم كرة زرقاء؟',['١٠','١٢','١٥','٢٠'],2,'عدد الأجزاء ٥، وقيمة الجزء ٥.']
+]
+};
+
+let answers={};
+
+function arabicNumber(n){
+return String(n).replace(/[0-9]/g,d=>'٠١٢٣٤٥٦٧٨٩'[Number(d)]);
+}
+
+function render(){
+answers={};
+let g=document.getElementById('grade').value;
+document.getElementById('questions').innerHTML=bank[g].map((q,i)=>`
+<article class="question">
+<h2>التحدي ${arabicNumber(i+1)}</h2>
+<p>${q[0]}</p>
+${q[1].map((o,j)=>`
+<button class="option" id="b${i}_${j}" onclick="choose(${i},${j})">${o}</button>
+`).join('')}
+<div id="f${i}" class="feedback"></div>
+</article>
+`).join('');
+document.getElementById('result').textContent='';
+}
+
+function choose(i,j){
+answers[i]=j;
+document.querySelectorAll(`[id^="b${i}_"]`).forEach(b=>b.classList.remove('chosen'));
+document.getElementById(`b${i}_${j}`).classList.add('chosen');
+}
+
+function check(){
+let g=document.getElementById('grade').value,score=0;
+bank[g].forEach((q,i)=>{
+let good=answers[i]===q[2];
+if(good)score++;
+let f=document.getElementById('f'+i);
+f.className='feedback '+(good?'correct':'wrong');
+f.textContent=answers[i]===undefined
+?'لم تجيبي بعد. التفسير: '+q[3]
+:good?'أحسنتِ! '+q[3]
+:'راجعي الحل. '+q[3];
+});
+let name=document.getElementById('student').value.trim();
+document.getElementById('result').textContent=
+(name?name+'، ':'')+
+'نتيجتك: '+arabicNumber(score)+' من '+arabicNumber(bank[g].length)+' — '+
+(score===bank[g].length?'ممتازة! 🌟':'حاولي مرة أخرى لتحسين نتيجتك 🌷');
+}
+
+function resetAnswers(){render()}
+render();
+</script>
+</body>
+</html>
